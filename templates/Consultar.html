@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <br>
+    <br>
+    <h1>Gestion de Frutas</h1>
+    <br>
+    
+    <form action="/consultar">
+        <label>Flor:</label>
+        <input type ="text" name="nombre" placeholder="Escribe el nombre de la flor"><br>
+        
+        
+        <button type="submit">Consultar</button>
+        <br>
+    </form>
+
+
+
+    <h1>Frutas</h1>
+<br>
+<table>
+
+    <thead>
+      <tr>
+       <td>Id: </td>
+       <td>nombre: </td>
+       <td>Cantidad: </td>
+       <td>Precio: </td>
+      </tr>
+    </thead>
+   
+     <tbody>
+      {% if flor %}
+      <tr>
+       <td>{{flor.0}}</td>
+       <td>{{flor.1}}</td>
+       <td>{{flor.2}}</td>
+       <td>{{flor.3}}</td>
+       
+      </tr>
+      {% endif %}
+     </tbody>
+   
+   </table>
+</body>
+</html>

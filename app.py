@@ -36,5 +36,45 @@ def guardar():
     flash('EL DATO FUE AGREGADO CORRECTAMENTE')
     return redirect(url_for('index'))
 
+@app.route('/editar/<id>')
+def editar(id):
+    CursorId= MySQL.connection.cursor()
+    CursorId.execute('select * from tbflores where id= %s',(id,))
+    consulId= CursorId.fetchone()  
+    return render_template('Editar.html', Flores=consulId)
+
+@app.route('/update/<id>', methods=['POST'])
+def update(id):
+   if request.method == 'POST':
+    Vnombre=request.form['txtNombre']
+    Vcantidad=request.form['txtCantidad']
+    Vprecio=request.form['txtPrecio']
+    curAct= MySQL.connection.cursor()
+    curAct.execute('update tbflores set nombre= %s, cantidad= %s, precio= %s  where id= %s',(Vnombre,Vcantidad,Vprecio,id))
+    MySQL.connection.commit()
+    
+    
+    flash('Se actualizo el nombre de la flor'+Vnombre)    
+    return redirect(url_for('index'))
+   
+   #consultar
+@app.route("/Consultar.html")
+def consultasFrutas():
+    return render_template('Consultar.html')
+
+
+
+@app.route("/consultar")
+def consulta():
+    vnombre = request.form.get('nombre', False)
+    cs = MySQL.connection.cursor()
+    cs.execute('select * from tbflores where nombre = %s order by nombre', [vnombre])
+    data = cs.fetchone()
+    print(data)
+    return render_template('Consultar.html', Flor = data)
+
+
+
+
 if __name__ == '__main__':
     app.run(port=5000 ,debug= True)

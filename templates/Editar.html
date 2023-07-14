@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Datos Floreria</title>
+</head>
+<body>
+    {%with mensajes=get_flashed_messages()%}
+        {% if mensajes %}
+            {% for msj in mensajes %}
+                 <h3>{{msj}}</h3>
+            {%endfor%}
+        {%endif%}
+    {%endwith%} 
+    <H1>Editar Datos Floreria</H1>
+    <br>
+    <form action="/update/{{Flores.0}}" method="POST">
+        <input type="text" name="txtNombre"" placeholder="Escribe el nombre de la flor" value="{{Flores.1}}">
+        <input type="text" name="txtCantidad" placeholder="Escribe la cantidad" value="{{Flores.2}}">
+        <input type="number" name="txtPrecio" aria-placeholder="Escribe el precio" value="{{Flores.3}}">
+        <button type="submit">Actualizar</button>
+    </form>
+</body>
+</html>
